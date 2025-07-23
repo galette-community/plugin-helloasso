@@ -1,0 +1,127 @@
+{#
+/**
+ * Copyright © 2003-2025 The Galette Team
+ *
+ * This file is part of Galette Helloasso plugin (https://galette-community.github.io/plugin-helloasso).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends not login.isLogged() ? "public_page.html.twig" : "page.html.twig" %}
+
+{% block content %}
+    {% if helloasso.isLoaded() and helloasso.getOrganizationSlug() != null and helloasso.getClientId() != null and helloasso.getClientSecret() != null %}
+        {% if amounts|length > 0 %}
+            <form action="" method="post" id="helloassoForm" class="ui form">
+                <div class="ui top attached accordion-styled header">
+                    {% if amounts|length == 1%}
+                        {{ _T("Payment reason", "helloasso") }}
+                    {% elseif amounts|length > 1 %}
+                        {{ _T("Select an payment reason", "helloasso") }}
+                    {% endif %}
+                </div>
+                <div class="ui bottom attached accordion-styled segment">
+                    <div class="active content field">
+                        <div class="field inline">
+                            <input type="hidden" name="item_name" id="item_name" value="{% if login.isLogged() %}{{ _T("annual fee") }}{% else %}{{ _T("donation in money") }}{% endif %}"/>
+                            <div class="grouped fields">
+                                {% for k, amount in amounts %}
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input type="radio" name="item_id" id="in{{ k }}" value="{{ k }}"{% if loop.index0 == 0 %} checked="checked"{% endif %}/>
+                                            <label for="in{{ k }}"><span id="in{{ k }}_name" data-amount="{{ amount['amount'] }}">{{ amount['name'] }}</span>
+                                                ({{ amount['amount']|format_currency('EUR', {}, galette_lang) }})
+                                            </label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {% include "components/forms/text.html.twig" with {
+                            id: 'amount',
+                            value: amounts|first.amount,
+                            label: _T("Amount"),
+                            required: true
+                        } %}
+                    </div>
+                </div>
+
+                <div class="ui basic center aligned fitted segment">
+                    <button type="submit" name="valid" class="action ui labeled icon primary button"{% if login.isSuperAdmin() %} disabled{% endif %}>
+                        <i class="helloasso icon"></i>
+                        {{ _T("Pay with HelloAsso", "helloasso") }}
+                    </button>
+                    <br/>
+                    <span class="ui small text">
+                        <i class="lock icon"></i>
+                        {{ _T("Secured payment", "helloasso") }}
+                        <img src="{{ url_for("plugin_res", {"plugin": "plugin-helloasso", "path": "images/logo-visa.svg"}) }}" alt="Logo Visa" />
+                        <img src="{{ url_for("plugin_res", {"plugin": "plugin-helloasso", "path": "images/logo-mastercard.svg"}) }}" alt="Logo Mastercard" />
+                        <img src="{{ url_for("plugin_res", {"plugin": "plugin-helloasso", "path": "images/logo-cb.svg"}) }}" alt="Logo CB" />
+                        <img src="{{ url_for("plugin_res", {"plugin": "plugin-helloasso", "path": "images/logo-pci.svg"}) }}" alt="Logo PCI" />
+                    </span>
+                    {% include "components/forms/csrf.html.twig" %}
+                </div>
+
+                <div class="ui info visible center aligned message">
+                    <span class="ui small text">{{ _T("We have chosen HelloAsso to process your payment. HelloAsso guarantees that 100% of your payment will be donated to our organization. You can support the assistance they provide to organizations by leaving a voluntary contribution to HelloAsso at the time of your payment.", "helloasso") }}</span>
+                </div>
+            </form>
+        {% else %}
+            <div class="ui small message">
+                <div class="content">
+                    <em>{{ _T("No payment reasons are available.", "helloasso") }}</em>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if helloasso.isLoaded() and helloasso.getOrganizationSlug() != null and helloasso.getClientId() != null and helloasso.getClientSecret() != null and amounts|length > 0 %}
+        <script type="text/javascript">
+            $(function() {
+                $('input[name="item_id"]').change(function(){
+                    var _amount = parseFloat($('#' + this.id + '_name').data('amount'));
+                    var _name = $('#' + this.id + '_name').text();
+                    $('#item_name').val(_name);
+                    if ( _amount != '' && !isNaN(_amount) ) {
+                        $('#amount').val(_amount);
+                    }
+                });
+                {% if amounts|length > 0 %}
+                    $('#helloassoForm').submit(function(e) {
+                        var _checked = $('input:checked');
+                        if (_checked.length == 0 ) {
+                            alert("{{ _T("You have to select an option.", "helloasso") }}");
+                            return false;
+                        } else {
+                            var _current_amount = parseFloat($('#amount').val());
+                            var _amount = parseFloat($('#' + _checked[0].id + '_name').data('amount'));
+                            if ( isNaN(_current_amount) ) {
+                                alert("{{ _T("Please enter an amount.", "helloasso")|e('js') }}");
+                                return false;
+                            } else if ( !isNaN(_amount) && _current_amount < _amount ) {
+                                alert("{{ _T("The amount you've entered is lower than the minimum amount for the selected option. Please choose another option or change the amount.", "helloasso")|e('js') }}");
+                                return false;
+                            }
+                        }
+                        return true;
+                    });
+                {% endif %}
+            });
+        </script>
+    {% endif %}
+{% endblock %}

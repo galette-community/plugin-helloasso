@@ -1,35 +1,29 @@
-# Galette Paypal plugin
+# Galette HelloAsso plugin
 
-[![GitHub license](https://img.shields.io/github/license/galette/galette.svg)](https://github.com/galette/plugin-paypal/blob/master/COPYING)
+[![GitHub license](https://img.shields.io/github/license/galette-community/plugin-helloasso)](https://github.com/galette-community/plugin-helloasso/blob/master/COPYING)
 
 ### English
 
-A [Galette](https://galette.eu) plugin to handle paypal payments.
+A [Galette](https://galette.eu) plugin to handle membership fees and donations payments with HelloAsso.
 
-* website: https://galette.eu - https://doc.galette.eu/en/master/plugins/paypal.html
-* bugs and features: http://bugs.galette.eu/projects/galette-plugin-paypa
-* mailing lists:
-  * users: https://listengine.tuxfamily.org/lists.galette.eu/users/
-  * developpers: https://listengine.tuxfamily.org/lists.galette.eu/devel/
-* documentation: https://doc.galette.eu/en/master/plugins/paypal.html
+* [website](https://galette-community.github.io/plugin-helloasso)
+* [bugs and features](https://github.com/galette-community/plugin-helloasso/issues)
+* [documentation](https://galette-community.github.io/plugin-helloasso/documentation.html)
 
-To use Galette Paypal plugin, you'll need a reliable Galette version, and of course the plugin itself by either:
+To use Galette HelloAsso plugin, you'll need a reliable Galette version, and of course the plugin itself by either:
 
-* download latest stable version available from [Galette Paypal plugin page](https://doc.galette.eu/en/master/plugins/paypal.html)
-* use [Galette Paypal plugin soure code from repository](http://doc.galette.eu/en/develop/development/git.html) (make sure you install third party dependencies), this solution requires some technical skills
+* download latest stable version available from the [Galette HelloAsso plugin page](https://github.com/galette-community/plugin-helloasso/releases)
+* use [Galette HelloAsso plugin source code from repository](https://github.com/galette-community/plugin-helloasso), this solution requires some technical skills
 
 ### Français
 
-Un plugin [Galette](https://galette.eu) pour gérer paiments de cotisation et de dons via Paypal.
+Un plugin [Galette](https://galette.eu) pour gérer les paiements de cotisations et de dons via HelloAsso.
 
-* site web : https://galette.eu - https://doc.galette.eu/fr/master/plugins/paypal.html
-* bogues et fonctionnalités : http://bugs.galette.eu/projects/galette-plugin-paypa
-* liste de diffusion :
-  * utilisateurs : https://listengine.tuxfamily.org/lists.galette.eu/users/
-  * développeurs : https://listengine.tuxfamily.org/lists.galette.eu/devel/
-* documentation : https://doc.galette.eu/fr/master/plugins/paypal.html
+* [site web](https://galette-community.github.io/plugin-helloasso)
+* [bogues et fonctionnalités](https://github.com/galette-community/plugin-helloasso/issues)
+* [documentation](https://galette-community.github.io/plugin-helloasso/documentation.html)
 
-Pour utiliser le plugin Paypal pour Galette, vous aurez besoin d'une version adéquate de Galette, ainsi que du plugin lui même :
+Pour utiliser le plugin HelloAsso pour Galette, vous aurez besoin d'une version adéquate de Galette, ainsi que du plugin lui même :
 
-* télécharger la dernière version stable depuis la [page du  plugin Paypal pour Galette](https://doc.galette.eu/en/master/plugins/paypal.html)
-* utiliser [le code source du plugin Paypal pour Galette depuis le dépôt](http://doc.galette.eu/en/develop/development/git.html) (assurez-vous d'installer les biliothèques tierces), cette solution requiert quelques compétences techniques
+* télécharger la dernière version stable depuis la [page du plugin HelloAsso pour Galette](https://github.com/galette-community/plugin-helloasso/releases)
+* utiliser [le code source du plugin HelloAsso pour Galette depuis le dépôt](https://github.com/galette-community/plugin-helloasso), cette solution requiert quelques compétences techniques

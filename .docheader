@@ -1,7 +1,5 @@
-<?php
-
 /**
- * Copyright © 2003-2025 The Galette Team
+ * Copyright © 2003-%year% The Galette Team
  *
  * This file is part of Galette Helloasso plugin (https://galette-community.github.io/plugin-helloasso).
  *
@@ -18,13 +16,3 @@
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
-
-declare(strict_types=1);
-
-/**
- * Configuration
- *
- * @author Guillaume AGNIERAY <dev@agnieray.net>
- */
-
-define('HELLOASSO_PREFIX', 'helloasso_');

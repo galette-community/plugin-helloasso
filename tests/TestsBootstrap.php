@@ -3,7 +3,7 @@
 /**
  * Copyright © 2003-2025 The Galette Team
  *
- * This file is part of Galette (https://galette.eu).
+ * This file is part of Galette Helloasso plugin (https://galette-community.github.io/plugin-helloasso).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  */
 
 /**
- * Bootstrap tests file for Galette Paypal plugin
+ * Bootstrap tests file for Galette Helloasso plugin
  *
  * @author Johan Cwiklinski <johan@x-tnd.be>
  */

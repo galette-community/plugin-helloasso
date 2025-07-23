@@ -1,0 +1,139 @@
+{#
+/**
+ * Copyright © 2003-2025 The Galette Team
+ *
+ * This file is part of Galette Helloasso plugin (https://galette-community.github.io/plugin-helloasso).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends 'elements/list.html.twig' %}
+
+{% set filters = helloasso_history.filters %}
+
+{% set form = {
+    'order': {
+        'name': "helloasso_history"
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%1$s entry", "%1$s entries", nb)|format(nb),
+        'route': {
+            'name': 'filter_helloasso_history'
+        }
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {% set no_action = true %}
+    {% set columns = [
+        {
+            'label': '#',
+            'collapse': true
+        },
+        {
+            'label': _T("Date"), 'order': constant("Galette\\Filters\\HistoryList::ORDERBY_DATE"),
+            'collapse': true
+        },
+        {
+            'label': _T("Name"),
+            'collapse': true
+        },
+        {
+            'label': _T("Subject"),
+            'collapse': true
+        },
+        {
+            'label': _T("Amount"),
+            'collapse': true
+        },
+        {'label': _T("Request", "helloasso")}
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for log in logs %}
+        <tr>
+            <td class="center collapsing" data-scope="row">
+                {{ loop.index }}
+                <span class="visually-hidden">
+                    {{ _T("History entry %id")|replace({'%id': loop.index}) }}
+                </span>
+            </td>
+            <td class="left collapsing" data-col-label="{{ _T("Date") }}">
+                {{ log.history_date|date(_T("Y-m-d H:i:s")) }}
+                {% if log.duplicate is defined %}
+                    <i class="exclamation circle red icon tooltip" data-html="{{ _T("Duplicate", "helloasso") }}"></i>
+                    <span class="visually-hidden">
+                        {{ _T("Duplicate", "helloasso") }}
+                    </span>
+                {% endif %}
+            </td>
+            <td class="left collapsing" data-col-label="{{ _T("Name") }}">
+        {% if log.request is iterable %}
+            {% if log.request.metadata.member_id is defined %}
+                <a href="{{ url_for("member", {"id": log.request.metadata.member_id}) }}">
+            {% endif %}
+            {{ log.request.metadata.checkout_name|default(_T("Anonymous", "helloasso")) }}
+            {% if log.request.metadata.checkout_firstname is defined %}
+                {{ log.request.metadata.checkout_firstname }}
+            {% endif %}
+            {% if log.request.metadata.member_id is defined %}
+                </a>
+            {% endif %}
+        {% else %}
+                {{ _T("No request or unable to read request.", "helloasso") }}
+        {% endif %}
+            </td>
+            <td class="left collapsing" data-col-label="{{ _T("Subject") }}">
+        {% if log.request is iterable %}
+            {% if log.request.metadata.item_name is defined %}
+                <span class="ui green small label">
+                    {{ _T("Payment nb.", "helloasso") }}
+                    {{ log.checkout_id }}
+                </span>
+                | {{ log.request.metadata.item_name }}
+            {% endif %}
+        {% endif %}
+            </td>
+            <td class="right collapsing" data-col-label="{{ _T("Amount") }}">
+                {{ log.amount }}
+            </td>
+            <td class="left" data-col-label="{{ _T("Request", "helloasso") }}">
+                <details class="ui basic styled accordion">
+                    <summary class="title">
+                        <i class="caret down icon" aria-hidden="true"></i> {{ _T("Show/hide full request", "helloasso") }}
+                    </summary>
+                    <div class="content">
+                        <pre>{{ log.raw_request }}</pre>
+                    </div>
+                </details>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{{ _T("logs are empty") }}</td></tr>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+        <script type="text/javascript">
+            $('#nbshow').change(function() {
+                this.form.submit();
+            });
+        </script>
+{% endblock %}

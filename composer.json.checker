@@ -2,7 +2,7 @@
     "autoload": {
         "psr-4": {
             "Galette\\": "galette-core/galette/lib/Galette",
-            "GalettePaypal\\": "lib/GalettePaypal"
+            "GaletteHelloasso\\": "lib/GaletteHelloasso"
         }
     },
     "require": {

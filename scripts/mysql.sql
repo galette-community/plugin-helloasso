@@ -1,40 +1,48 @@
 --
--- Table structure for table `galette_paypal_types_cotisation_prices`
+-- Table structure for table `galette_helloasso_history`
 --
-DROP TABLE IF EXISTS galette_paypal_types_cotisation_prices;
-CREATE TABLE galette_paypal_types_cotisation_prices (
-  id_type_cotis int(10) unsigned NOT NULL,
-  amount double NULL,
-  PRIMARY KEY (id_type_cotis),
-  CONSTRAINT galette_cotisation_price FOREIGN KEY (id_type_cotis) REFERENCES galette_types_cotisation (id_type_cotis) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Table structure for table `galette_paypal_history`
---
-DROP TABLE IF EXISTS galette_paypal_history;
-CREATE TABLE galette_paypal_history (
-  id_paypal int(11) NOT NULL auto_increment,
+DROP TABLE IF EXISTS galette_helloasso_history;
+CREATE TABLE galette_helloasso_history (
+  id_helloasso int(11) NOT NULL auto_increment,
   history_date datetime NOT NULL,
+  checkout_id varchar(255) COLLATE utf8_unicode_ci,
   amount double NOT NULL,
   comments varchar(255)  COLLATE utf8_unicode_ci,
   request text COLLATE utf8_unicode_ci,
-  signature varchar(255) NOT NULL,
   state tinyint(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id_paypal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id_helloasso`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Table structure for table `galette_paypal_preferences`
+-- Table structure for table `galette_helloasso_preferences`
 --
-DROP TABLE IF EXISTS galette_paypal_preferences;
-CREATE TABLE galette_paypal_preferences (
+DROP TABLE IF EXISTS galette_helloasso_preferences;
+CREATE TABLE galette_helloasso_preferences (
   id_pref int(10) unsigned NOT NULL auto_increment,
   nom_pref varchar(100) NOT NULL default '',
   val_pref varchar(200) NOT NULL default '',
-  PRIMARY KEY  (id_pref),
-  UNIQUE KEY(nom_pref)
-) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+  PRIMARY KEY (id_pref),
+  UNIQUE KEY (nom_pref)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-INSERT INTO galette_paypal_preferences (nom_pref, val_pref) VALUES ('paypal_id', '');
-INSERT INTO galette_paypal_preferences (nom_pref, val_pref) VALUES ('paypal_inactives', '4,6,7');
+INSERT INTO galette_helloasso_preferences (nom_pref, val_pref) VALUES ('helloasso_test_mode', '');
+INSERT INTO galette_helloasso_preferences (nom_pref, val_pref) VALUES ('helloasso_organization_slug', '');
+INSERT INTO galette_helloasso_preferences (nom_pref, val_pref) VALUES ('helloasso_client_id', '');
+INSERT INTO galette_helloasso_preferences (nom_pref, val_pref) VALUES ('helloasso_client_secret', '');
+INSERT INTO galette_helloasso_preferences (nom_pref, val_pref) VALUES ('helloasso_inactives', '4,6,7');
+
+--
+-- Table structure for table `galette_helloasso_tokens`
+--
+DROP TABLE IF EXISTS galette_helloasso_tokens;
+CREATE TABLE galette_helloasso_tokens (
+  id int(10) unsigned NOT NULL auto_increment,
+  type varchar(100) NOT NULL default '',
+  value text NOT NULL,
+  expiry datetime NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY(type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+INSERT INTO galette_helloasso_tokens (type, value, expiry) VALUES ('access_token', '', NULL);
+INSERT INTO galette_helloasso_tokens (type, value, expiry) VALUES ('refresh_token', '', NULL);
