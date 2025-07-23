@@ -1,0 +1,51 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends 'page.html.twig' %}
+
+{% block content %}
+    {% if post %}
+        <p>{{ _T("Your paypal payment was successful. Some details are shown below:", "paypal") }}</p>
+        <table class="ui striped definition table">
+            <tr>
+                <th class="collapsing">{{ _T("Label") }}</th>
+                <td>{{ post.item_name }}</td>
+            </tr>
+            <tr>
+                <th class="collapsing">{{ _T("Payment date") }}</th>
+                <td>{{ post.payment_date }}</td>
+            </tr>
+            <tr>
+                <th class="collapsing">{{ _T("Payment status") }}</th>
+                <td>{{ post.payment_status }}</td>
+            </tr>
+            <tr>
+                <th class="collapsing">{{ _T("Payment type") }}</th>
+                <td>{{ post.payment_type }}</td>
+            </tr>
+            <tr>
+                <th class="collapsing">{{ _T("Amount") }}</th>
+                <td>{{ post.mc_gross }} {{ post.mc_currency }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <p>{{ _T("Your paypal payment was successful. You may receive a mail from paypal with details.", "paypal") }}</p>
+    {% endif %}
+{% endblock %}
