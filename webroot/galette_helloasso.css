@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Helloasso";
+  src:
+    url("./fonts/Helloasso.woff") format("woff"),
+    url("./fonts/Helloasso.woff2") format("woff2");
+}
+i.icon.helloasso::before {
+  font-family: Helloasso;
+  content: "H";
+}
+
+em[data-emoji=":helloasso:"]::before,
+em[data-emoji="helloasso"]::before {
+  background-image: url(./images/helloasso.svg);
+}

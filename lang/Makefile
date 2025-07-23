@@ -1,8 +1,8 @@
 INSTALLDIR = $(shell pwd)
-LANGUAGES = `find ./ -name "paypal_*.po" -print | sed 's|^\./paypal_\(.*\).po|\1|'`
-DOMAINS = paypal
+LANGUAGES = `find ./ -name "helloasso_*.po" -print | sed 's|^\./helloasso_\(.*\).po|\1|'`
+DOMAINS = helloasso
 PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
-              $(shell find ../lib/GalettePaypal/ -name \*.php) \
+              $(shell find ../lib/GaletteHelloasso/ -name \*.php) \
               $(shell find ../tempcache -name \*.twig)
 
 all : extract mo
@@ -42,7 +42,7 @@ mo :
 	done
 
 extract : twig ${PHP_SOURCES} Makefile
-	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o paypal.pot;
+	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o ${DOMAINS}.pot;
 	echo "Generating en_US:"
 	@for d in ${DOMAINS}; do \
 	  LANG=C msginit --no-translator -i $$d.pot --locale=en_US.utf8 -o $${d}_en_US.po; \

@@ -3,7 +3,7 @@
 /**
  * Copyright © 2003-2025 The Galette Team
  *
- * This file is part of Galette (https://galette.eu).
+ * This file is part of Galette Helloasso plugin (https://galette-community.github.io/plugin-helloasso).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,48 +21,58 @@
 
 declare(strict_types=1);
 
-use GalettePaypal\Controllers\PaypalController;
+use GaletteHelloasso\Controllers\HelloassoController;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
 
 $app->get(
     '/preferences',
-    [PaypalController::class, 'preferences']
-)->setName('paypal_preferences')->add($authenticate);
+    [HelloassoController::class, 'preferences']
+)->setName('helloasso_preferences')->add($authenticate);
 
 $app->post(
     '/preferences',
-    [PaypalController::class, 'storePreferences']
-)->setName('store_paypal_preferences')->add($authenticate);
+    [HelloassoController::class, 'storePreferences']
+)->setName('store_helloasso_preferences')->add($authenticate);
 
 $app->get(
     '/form',
-    [PaypalController::class, 'form']
-)->setName('paypal_form');
-
-$app->get(
-    '/cancel',
-    [PaypalController::class, 'cancel']
-)->setName('paypal_cancelled');
+    [HelloassoController::class, 'form']
+)->setName('helloasso_form');
 
 $app->post(
-    '/success',
-    [PaypalController::class, 'success']
-)->setName('paypal_success');
-
-$app->post(
-    '/notify',
-    [PaypalController::class, 'notify']
-)->setName('paypal_notify');
+    '/form',
+    [HelloassoController::class, 'formCheckout']
+)->setName('helloasso_formCheckout');
 
 $app->get(
     '/logs[/{option:order|reset|page}/{value}]',
-    [PaypalController::class, 'logs']
-)->setName('paypal_history')->add($authenticate);
+    [HelloassoController::class, 'logs']
+)->setName('helloasso_history')->add($authenticate);
 
 //history filtering
 $app->post(
     '/history/filter',
-    [PaypalController::class, 'filter']
-)->setName('filter_paypal_history')->add($authenticate);
+    [HelloassoController::class, 'filter']
+)->setName('filter_helloasso_history')->add($authenticate);
+
+$app->post(
+    '/webhook',
+    [HelloassoController::class, 'webhook']
+)->setName('helloasso_webhook');
+
+$app->get(
+    '/success',
+    [HelloassoController::class, 'returnUrl']
+)->setName('helloasso_success');
+
+$app->get(
+    '/cancel',
+    [HelloassoController::class, 'cancelUrl']
+)->setName('helloasso_cancel');
+
+$app->get(
+    '/error',
+    [HelloassoController::class, 'errorUrl']
+)->setName('helloasso_error');

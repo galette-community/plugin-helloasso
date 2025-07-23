@@ -1,5 +1,4 @@
-<?php
-
+{#
 /**
  * Copyright © 2003-2025 The Galette Team
  *
@@ -18,27 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
+#}
+{% extends not login.isLogged() ? "public_page.html.twig" : "page.html.twig" %}
 
-declare(strict_types=1);
-
-$this->register(
-    'Galette Helloasso',     //Name
-    'Helloasso integration', //Short description
-    'Guillaume AGNIERAY',    //Author
-    '1.0.0-dev',             //Version
-    '1.2.0',                 //Galette compatible version
-    'helloasso',             //routing name and translation domain
-    '2025-07-23',            //Release date
-    [   //Permissions needed
-        'helloasso_preferences'        => 'staff',
-        'store_helloasso_preferences'  => 'staff',
-        'helloasso_history'            => 'staff',
-        'filter_helloasso_history'     => 'staff'
-    ]
-);
-
-$this->setCsrfExclusions(
-    [
-    '/helloasso_(webhook|success|cancel|error)/',
-    ]
-);
+{% block content %}
+    <div class="ui info visible icon message">
+        <i class="check icon"></i>
+        <div class="content">
+            {{ _T("Your Helloasso payment has succeeded. You will receive an email from Helloasso with details.", "helloasso") }}
+        </div>
+    </div>
+{% endblock %}

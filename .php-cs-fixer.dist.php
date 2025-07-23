@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $finder = (new PhpCsFixer\Finder())
     ->in([
