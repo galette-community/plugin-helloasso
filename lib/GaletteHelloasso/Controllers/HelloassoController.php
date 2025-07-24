@@ -275,12 +275,14 @@ class HelloassoController extends AbstractPluginController
         }
 
         $amounts = $helloasso->getAllAmounts();
+        $tab = $request->getQueryParams()['tab'] ?? 'helloasso';
 
         $params = [
             'page_title'    => _T('Helloasso Settings', 'helloasso'),
             'helloasso'     => $helloasso,
             'webhook_url'   => $this->preferences->getURL() . $this->routeparser->urlFor('helloasso_webhook'),
-            'amounts'       => $amounts
+            'amounts'       => $amounts,
+            'tab'           => $tab
         ];
 
         // display page
@@ -339,9 +341,15 @@ class HelloassoController extends AbstractPluginController
             );
         }
 
+        if (isset($post['tab']) && $post['tab'] != 'helloasso') {
+            $tab = '?tab=' . $post['tab'];
+        } else {
+            $tab = '';
+        }
+
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->routeparser->urlFor('helloasso_preferences'));
+            ->withHeader('Location', $this->routeparser->urlFor('helloasso_preferences') . $tab);
     }
 
     /**

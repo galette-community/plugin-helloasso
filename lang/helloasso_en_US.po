@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 23:29+0200\n"
-"PO-Revision-Date: 2025-07-23 23:29+0200\n"
+"POT-Creation-Date: 2025-07-24 16:08+0200\n"
+"PO-Revision-Date: 2025-07-24 16:08+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_US\n"
@@ -70,27 +70,27 @@ msgstr ""
 msgid "An error occured redirecting to the checkout form."
 msgstr "An error occured redirecting to the checkout form."
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:280
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:281
 msgid "Helloasso Settings"
 msgstr "Helloasso Settings"
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:332
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:334
 msgid "Helloasso settings have been saved."
 msgstr "Helloasso settings have been saved."
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:338
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:340
 msgid "An error occured saving helloasso settings."
 msgstr "An error occured saving helloasso settings."
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:479
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:487
 msgid "Helloasso payment success"
 msgstr "Helloasso payment success"
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:503
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:511
 msgid "Your payment has been aborted!"
 msgstr "Your payment has been aborted!"
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:523
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:531
 msgid "Helloasso payment failure"
 msgstr "Helloasso payment failure"
 
@@ -137,51 +137,51 @@ msgstr "Your Helloasso payment has failed for technical reasons."
 msgid "Error"
 msgstr "Error"
 
-#: ../tempcache/helloasso_preferences.html.twig:71
+#: ../tempcache/helloasso_preferences.html.twig:72
 msgid "Cannot load the settings"
 msgstr "Cannot load the settings"
 
-#: ../tempcache/helloasso_preferences.html.twig:77
+#: ../tempcache/helloasso_preferences.html.twig:78
 msgid "An error occured while loading the settings from the database."
 msgstr "An error occured while loading the settings from the database."
 
-#: ../tempcache/helloasso_preferences.html.twig:81
+#: ../tempcache/helloasso_preferences.html.twig:82
 msgid "Please, check if the plugin's database has been properly initialized."
 msgstr "Please, check if the plugin's database has been properly initialized."
 
-#: ../tempcache/helloasso_preferences.html.twig:96
-msgid "Connected to HelloAsso"
-msgstr "Connected to HelloAsso"
+#: ../tempcache/helloasso_preferences.html.twig:97
+msgid "Parameters"
+msgstr "Parameters"
 
-#: ../tempcache/helloasso_preferences.html.twig:102
-msgid "Not connected to HelloAsso"
-msgstr "Not connected to HelloAsso"
+#: ../tempcache/helloasso_preferences.html.twig:105
+msgid "Connexion status"
+msgstr "Connexion status"
 
-#: ../tempcache/helloasso_preferences.html.twig:115
+#: ../tempcache/helloasso_preferences.html.twig:119
 msgid "Helloasso webhook URL"
 msgstr "Helloasso webhook URL"
 
-#: ../tempcache/helloasso_preferences.html.twig:126
+#: ../tempcache/helloasso_preferences.html.twig:130
 msgid "Enable test mode"
 msgstr "Enable test mode"
 
-#: ../tempcache/helloasso_preferences.html.twig:132
+#: ../tempcache/helloasso_preferences.html.twig:136
 msgid "Your organizationSlug"
 msgstr "Your organizationSlug"
 
-#: ../tempcache/helloasso_preferences.html.twig:138
+#: ../tempcache/helloasso_preferences.html.twig:142
 msgid "Your clientId"
 msgstr "Your clientId"
 
-#: ../tempcache/helloasso_preferences.html.twig:144
+#: ../tempcache/helloasso_preferences.html.twig:148
 msgid "Your clientSecret"
 msgstr "Your clientSecret"
 
-#: ../tempcache/helloasso_preferences.html.twig:166
+#: ../tempcache/helloasso_preferences.html.twig:170
 msgid "Amounts can be defined in the contributions types settings."
 msgstr "Amounts can be defined in the contributions types settings."
 
-#: ../tempcache/helloasso_preferences.html.twig:207
+#: ../tempcache/helloasso_preferences.html.twig:211
 msgid ""
 "Zero amounts, even if they are not disabled, are not proposed as a payment "
 "reason on the form. You can disable this reason, or set a positive value in "
@@ -190,6 +190,50 @@ msgstr ""
 "Zero amounts, even if they are not disabled, are not proposed as a payment "
 "reason on the form. You can disable this reason, or set a positive value in "
 "the contributions types settings."
+
+#: ../tempcache/helloasso_preferences.html.twig:255
+msgid "Connected to HelloAsso"
+msgstr "Connected to HelloAsso"
+
+#: ../tempcache/helloasso_preferences.html.twig:261
+msgid "Not connected to HelloAsso"
+msgstr "Not connected to HelloAsso"
+
+#: ../tempcache/helloasso_preferences.html.twig:274
+msgid "Test mode enabled"
+msgstr "Test mode enabled"
+
+#: ../tempcache/helloasso_preferences.html.twig:290
+msgid "Name"
+msgstr "Name"
+
+#: ../tempcache/helloasso_preferences.html.twig:301
+msgid "Description"
+msgstr "Description"
+
+#: ../tempcache/helloasso_preferences.html.twig:311
+msgid "Type"
+msgstr "Type"
+
+#: ../tempcache/helloasso_preferences.html.twig:319
+msgid "Category"
+msgstr "Category"
+
+#: ../tempcache/helloasso_preferences.html.twig:330
+msgid "RNA Number"
+msgstr "RNA Number"
+
+#: ../tempcache/helloasso_preferences.html.twig:348
+msgid ""
+"HelloAsso helps organizations collect payments online and offers its "
+"services free of charge. It covers all transaction fees so you can receive "
+"all the money your audiences contribute, free of charge. The voluntary "
+"contributions they leave are their sole source of income."
+msgstr ""
+"HelloAsso helps organizations collect payments online and offers its "
+"services free of charge. It covers all transaction fees so you can receive "
+"all the money your audiences contribute, free of charge. The voluntary "
+"contributions they leave are their sole source of income."
 
 #: ../tempcache/helloasso_form.html.twig:71
 msgid "Payment reason"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 23:19+0200\n"
-"PO-Revision-Date: 2025-07-23 23:29+0200\n"
+"POT-Creation-Date: 2025-07-24 16:05+0200\n"
+"PO-Revision-Date: 2025-07-24 16:08+0200\n"
 "Last-Translator: Guillaume AGNIERAY <dev@agnieray.net>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -74,28 +74,28 @@ msgstr ""
 "Une erreur est survenue lors de la redirection vers le formulaire de "
 "paiement."
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:280
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:281
 msgid "Helloasso Settings"
 msgstr "Préférences Helloasso"
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:332
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:334
 msgid "Helloasso settings have been saved."
 msgstr "Les préférences Helloasso ont été sauvegardées."
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:338
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:340
 msgid "An error occured saving helloasso settings."
 msgstr ""
 "Une erreur est survenue lors de l'enregistrement des préférences helloasso."
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:479
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:487
 msgid "Helloasso payment success"
 msgstr "Paiement Helloasso réussi"
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:503
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:511
 msgid "Your payment has been aborted!"
 msgstr "Votre paiement a été annulé !"
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:523
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:531
 msgid "Helloasso payment failure"
 msgstr "Échec du paiement Helloasso"
 
@@ -142,57 +142,57 @@ msgstr "Votre paiement Helloasso a échoué pour des raisons techniques."
 msgid "Error"
 msgstr "Erreur"
 
-#: ../tempcache/helloasso_preferences.html.twig:71
+#: ../tempcache/helloasso_preferences.html.twig:72
 msgid "Cannot load the settings"
 msgstr "Impossible de charger les préférences"
 
-#: ../tempcache/helloasso_preferences.html.twig:77
+#: ../tempcache/helloasso_preferences.html.twig:78
 msgid "An error occured while loading the settings from the database."
 msgstr ""
 "Une erreur est survenue lors du chargement des préférences depuis la base de "
 "données."
 
-#: ../tempcache/helloasso_preferences.html.twig:81
+#: ../tempcache/helloasso_preferences.html.twig:82
 msgid "Please, check if the plugin's database has been properly initialized."
 msgstr ""
 "Veuillez vérifier que la base de données du plugin a été correctement "
 "initialisée."
 
-#: ../tempcache/helloasso_preferences.html.twig:96
-msgid "Connected to HelloAsso"
-msgstr "Connecté à HelloAsso"
+#: ../tempcache/helloasso_preferences.html.twig:97
+msgid "Parameters"
+msgstr "Paramètres"
 
-#: ../tempcache/helloasso_preferences.html.twig:102
-msgid "Not connected to HelloAsso"
-msgstr "Non connecté à HelloAsso"
+#: ../tempcache/helloasso_preferences.html.twig:105
+msgid "Connexion status"
+msgstr "État de la connexion"
 
-#: ../tempcache/helloasso_preferences.html.twig:115
+#: ../tempcache/helloasso_preferences.html.twig:119
 msgid "Helloasso webhook URL"
 msgstr "URL du webhook à configurer dans Helloasso"
 
-#: ../tempcache/helloasso_preferences.html.twig:126
+#: ../tempcache/helloasso_preferences.html.twig:130
 msgid "Enable test mode"
 msgstr "Activer le mode test"
 
-#: ../tempcache/helloasso_preferences.html.twig:132
+#: ../tempcache/helloasso_preferences.html.twig:136
 msgid "Your organizationSlug"
 msgstr "Votre organizationSlug"
 
-#: ../tempcache/helloasso_preferences.html.twig:138
+#: ../tempcache/helloasso_preferences.html.twig:142
 msgid "Your clientId"
 msgstr "Votre clientId"
 
-#: ../tempcache/helloasso_preferences.html.twig:144
+#: ../tempcache/helloasso_preferences.html.twig:148
 msgid "Your clientSecret"
 msgstr "Votre clientSecret"
 
-#: ../tempcache/helloasso_preferences.html.twig:166
+#: ../tempcache/helloasso_preferences.html.twig:170
 msgid "Amounts can be defined in the contributions types settings."
 msgstr ""
 "Les montants peuvent être définis dans les paramètres des types de "
 "contributions."
 
-#: ../tempcache/helloasso_preferences.html.twig:207
+#: ../tempcache/helloasso_preferences.html.twig:211
 msgid ""
 "Zero amounts, even if they are not disabled, are not proposed as a payment "
 "reason on the form. You can disable this reason, or set a positive value in "
@@ -202,6 +202,51 @@ msgstr ""
 "comme motif de paiement sur le formulaire. Vous pouvez désactiver ce motif "
 "ou définir une valeur positive dans les paramètres des types de "
 "contributions."
+
+#: ../tempcache/helloasso_preferences.html.twig:255
+msgid "Connected to HelloAsso"
+msgstr "Connecté à HelloAsso"
+
+#: ../tempcache/helloasso_preferences.html.twig:261
+msgid "Not connected to HelloAsso"
+msgstr "Non connecté à HelloAsso"
+
+#: ../tempcache/helloasso_preferences.html.twig:274
+msgid "Test mode enabled"
+msgstr "Mode test activé"
+
+#: ../tempcache/helloasso_preferences.html.twig:290
+msgid "Name"
+msgstr "Nom"
+
+#: ../tempcache/helloasso_preferences.html.twig:301
+msgid "Description"
+msgstr "Description"
+
+#: ../tempcache/helloasso_preferences.html.twig:311
+msgid "Type"
+msgstr "Type"
+
+#: ../tempcache/helloasso_preferences.html.twig:319
+msgid "Category"
+msgstr "Catégorie"
+
+#: ../tempcache/helloasso_preferences.html.twig:330
+msgid "RNA Number"
+msgstr "Numéro RNA"
+
+#: ../tempcache/helloasso_preferences.html.twig:348
+msgid ""
+"HelloAsso helps organizations collect payments online and offers its "
+"services free of charge. It covers all transaction fees so you can receive "
+"all the money your audiences contribute, free of charge. The voluntary "
+"contributions they leave are their sole source of income."
+msgstr ""
+"HelloAsso aide les associations à collecter des paiements en ligne et "
+"propose ses services gratuitement. Elle prend à sa charge tous les frais de "
+"transaction pour que vous puissiez bénéficier de la totalité des sommes "
+"versées par vos publics, sans frais. Les contributions volontaires laissées "
+"par ces derniers sont leur unique source de revenus."
 
 #: ../tempcache/helloasso_form.html.twig:71
 msgid "Payment reason"

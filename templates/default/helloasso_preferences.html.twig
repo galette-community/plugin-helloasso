@@ -36,14 +36,11 @@
                 </div>
             </div>
         {% else %}
-            <div class="ui segment">
-                    <div class="field">
-                {% if helloasso.getOrganization() is not empty %}
-                        <div class="ui fluid centered large green label">{{ _T("Connected to HelloAsso", "helloasso") }}</div>
-                {% else %}
-                        <div class="ui fluid centered large red label">{{ _T("Not connected to HelloAsso", "helloasso") }}</div>
-                {% endif %}
-                    </div>
+            <div class="ui stackable pointing inverted menu tabbed">
+                <a href="{{ url_for('helloasso_preferences') }}?tab=helloasso" class="item{{ tab == 'helloasso' ? ' active' }}" data-tab="helloasso">{{ _T("Parameters", "helloasso") }}</a>
+                <a href="{{ url_for('helloasso_preferences') }}?tab=status" class="item{{ tab == 'status' ? ' active' }}" data-tab="status">{{ _T("Connexion status", "helloasso") }}</a>
+            </div>
+            <div class="ui{{ tab == 'helloasso' ? ' active' }} tab segment" data-tab="helloasso">
                 {%if login.isAdmin() %}
                     <div class="inline field">
                         <label>{{ _T("Helloasso webhook URL", "helloasso") }} :</label>
@@ -114,6 +111,65 @@
                     </table>
                 {% endif %}
             </div>
+            <div class="ui{{ tab == 'status' ? ' active' }} tab segment" data-tab="status">
+                <div class="ui list">
+                    <div class="item">
+                        {% if helloasso.getOrganization() is not empty %}
+                            <div class="ui fluid centered large green label">{{ _T("Connected to HelloAsso", "helloasso") }}</div>
+                        {% else %}
+                            <div class="ui fluid centered large red label">{{ _T("Not connected to HelloAsso", "helloasso") }}</div>
+                        {% endif %}
+                    </div>
+                    {% if helloasso.getTestMode() %}
+                        <div class="item">
+                            <div class="ui fluid centered large orange label">{{ _T("Test mode enabled", "helloasso") }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if helloasso.getOrganization() is not empty %}
+                        <div class="ui relaxed divided list">
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ _T("Name", "helloasso") }}</div>
+                                    <div class="description">{{ helloasso.getOrganization().name }}</div>
+                                </div>
+                            </div>
+                        {% if helloasso.getOrganization().description is defined %}
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ _T("Description", "helloasso") }}</div>
+                                    <div class="description">{{ helloasso.getOrganization().description }}</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ _T("Type", "helloasso") }}</div>
+                                    <div class="description">{{ helloasso.getOrganization().type }}</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ _T("Category", "helloasso") }}</div>
+                                    <div class="description">{{ helloasso.getOrganization().category }}</div>
+                                </div>
+                            </div>
+                        {% if helloasso.getOrganization().rnaNumber is defined %}
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ _T("RNA Number", "helloasso") }}</div>
+                                    <div class="description">{{ helloasso.getOrganization().rnaNumber }}</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        </div>
+                {% endif %}
+
+                <div class="ui info visible center aligned message">
+                    <span class="ui small text">{{ _T("HelloAsso helps organizations collect payments online and offers its services free of charge. It covers all transaction fees so you can receive all the money your audiences contribute, free of charge. The voluntary contributions they leave are their sole source of income.", "helloasso") }}</span>
+                </div>
+            </div>
 
             <div class="ui basic center aligned segment">
                 <button type="submit" class="ui labeled icon primary button action">
@@ -121,8 +177,21 @@
                     {{ _T("Save") }}
                 </button>
                 <input type="hidden" name="valid" value="1"/>
+                <input type="hidden" name="tab" id="tab" value="{{ tab }}"/>
                 {% include "components/forms/csrf.html.twig" %}
             </div>
         {% endif %}
     </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function(){
+            $('.pointing.menu .item').tab({
+                onVisible: function(tabPath) {
+                    document.getElementById('tab').value = tabPath;
+                }
+            });
+        });
+    </script>
 {% endblock %}
