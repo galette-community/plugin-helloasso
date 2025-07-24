@@ -93,7 +93,7 @@ class HelloassoHistory extends History
 
             Analog::log(
                 'An entry has been added in helloasso history',
-                Analog::INFO
+                Analog::DEBUG
             );
         } catch (\Exception $e) {
             Analog::log(
@@ -162,7 +162,7 @@ class HelloassoHistory extends History
                     $new[] = $o;
                 } catch (\Exception $e) {
                     Analog::log(
-                        'Error loading Paypal history entry #' . $o[$this->getPk()] .
+                        'Error loading helloasso history entry #' . $o[$this->getPk()] .
                         ' ' . $e->getMessage(),
                         Analog::WARNING
                     );
