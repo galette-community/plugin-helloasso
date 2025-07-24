@@ -264,7 +264,7 @@ class Helloasso
             Analog::log(
                 '[' . get_class($this) .
                 '] Helloasso settings were sucessfully stored',
-                Analog::INFO
+                Analog::DEBUG
             );
 
             return true;
@@ -312,7 +312,7 @@ class Helloasso
 
             Analog::log(
                 'Helloasso tokens were successfully stored into database.',
-                Analog::INFO
+                Analog::DEBUG
             );
             return true;
         } catch (\Exception $e) {

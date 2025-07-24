@@ -366,7 +366,10 @@ class HelloassoController extends AbstractPluginController
         $post = json_decode($body->getContents(), true);
         $helloasso = new Helloasso($this->zdb, $this->preferences);
 
-        Analog::log("Helloasso webhook request: " . var_export($post, true), Analog::DEBUG);
+        Analog::log(
+            "Helloasso webhook request: " . var_export($post, true),
+            Analog::DEBUG
+        );
 
         if (
             (isset($post['eventType']) && $post['eventType'] == 'Payment')
@@ -427,7 +430,7 @@ class HelloassoController extends AbstractPluginController
                     $valid = $contrib->check($check_contrib_args, [], []);
                     if ($valid !== true) {
                         Analog::log(
-                            'An error occurred while storing a new contribution from Helloasso payment:' .
+                            'Cannot create invalid contribution from Helloasso payment:' .
                             implode("\n   ", $valid),
                             Analog::ERROR
                         );
@@ -440,7 +443,7 @@ class HelloassoController extends AbstractPluginController
                         // contribution has been stored :)
                         Analog::log(
                             'Helloasso payment has been successfully registered as a contribution',
-                            Analog::INFO
+                            Analog::DEBUG
                         );
                         $hh->setState(HelloassoHistory::STATE_PROCESSED);
                     } else {
