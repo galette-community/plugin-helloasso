@@ -381,8 +381,7 @@ class HelloassoController extends AbstractPluginController
             // are we working on a real contribution?
             $real_contrib = false;
             if (
-                isset($post['metadata']['member_id'])
-                && is_numeric($post['metadata']['member_id'])
+                array_key_exists('member_id', $post['metadata'])
                 && $post['data']['amount'] == $post['data']['items'][0]['amount']
             ) {
                 $real_contrib = true;
@@ -408,14 +407,15 @@ class HelloassoController extends AbstractPluginController
                 * script, Galette does not handle anonymous contributions
                 */
                 $amount = $post['data']['amount'];
+                $member_id = array_key_exists('member_id', $post['metadata']) ? $post['metadata']['member_id'] : '';
                 $contrib_args = [
                     'type'          => $post['metadata']['item_id'],
-                    'adh'           => $post['metadata']['member_id'],
+                    'adh'           => $member_id,
                     'payment_type'  => PaymentType::CREDITCARD
                 ];
                 $check_contrib_args = [
                     ContributionsTypes::PK  => $post['metadata']['item_id'],
-                    Adherent::PK            => $post['metadata']['member_id'],
+                    Adherent::PK            => $member_id,
                     'type_paiement_cotis'   => PaymentType::CREDITCARD,
                     'montant_cotis'         => $amount / 100,
                 ];

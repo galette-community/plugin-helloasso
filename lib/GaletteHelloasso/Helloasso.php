@@ -342,6 +342,7 @@ class Helloasso
     public function checkout(array $metadata, float $amount): array|bool
     {
         try {
+            $tokens = $this->getTokens();
             $data = [
                 'totalAmount' => (int)$amount,
                 'initialAmount' => (int)$amount,
@@ -366,12 +367,12 @@ class Helloasso
             $headers = [
                 'headers' => [
                     'accept' => 'application/json',
-                    'authorization' => 'Bearer ' . $this->getTokens()['access_token']
+                    'authorization' => 'Bearer ' . $tokens['access_token']
                 ],
                 'json' => $data,
             ];
-            $response = $client->post($this->getApiRoute() . 'v5/organizations/' . $this->getOrganizationSlug() . '/checkout-intents', $headers);
-            $contents = $response->getBody()->getContents();
+            $request = $client->post($this->getApiRoute() . 'v5/organizations/' . $this->getOrganizationSlug() . '/checkout-intents', $headers);
+            $contents = $request->getBody()->getContents();
 
             return json_decode($contents, true);
         } catch (\Exception $e) {
@@ -492,8 +493,8 @@ class Helloasso
                 'form_params' => $parameters
             ];
             $now = new \Datetime();
-            $response = $client->request('POST', $this->getApiRoute(true) . 'token', $post_parameters);
-            $contents = $response->getBody()->getContents();
+            $request = $client->request('POST', $this->getApiRoute(true) . 'token', $post_parameters);
+            $contents = $request->getBody()->getContents();
             $json = json_decode($contents, true);
 
             $this->tokens['access_token'] = $json['access_token'];
@@ -541,15 +542,16 @@ class Helloasso
     public function getOrganization(): array
     {
         try {
+            $tokens = $this->getTokens();
             $client = $this->setupClient();
             $headers = [
                 'headers' => [
                     'accept' => 'application/json',
-                    'authorization' => 'Bearer ' . $this->getTokens()['access_token']
+                    'authorization' => 'Bearer ' . $tokens['access_token']
                 ]
             ];
-            $response = $client->request('GET', $this->getApiRoute() . 'v5/organizations/' . $this->getOrganizationSlug(), $headers);
-            $contents = $response->getBody()->getContents();
+            $request = $client->request('GET', $this->getApiRoute() . 'v5/organizations/' . $this->getOrganizationSlug(), $headers);
+            $contents = $request->getBody()->getContents();
             return json_decode($contents, true);
         } catch (\Throwable $e) {
             Analog::log(
