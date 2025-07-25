@@ -307,19 +307,21 @@ class HelloassoController extends AbstractPluginController
         $post = $request->getParsedBody();
         $helloasso = new Helloasso($this->zdb, $this->preferences);
 
-        if (array_key_exists('helloasso_test_mode', $post) && $this->login->isAdmin()) {
-            $helloasso->setTestMode(true);
-        } else {
-            $helloasso->setTestMode(false);
-        }
-        if (isset($post['helloasso_organization_slug']) && $this->login->isAdmin()) {
-            $helloasso->setOrganizationSlug($post['helloasso_organization_slug']);
-        }
-        if (isset($post['helloasso_client_id']) && $this->login->isAdmin()) {
-            $helloasso->setClientId($post['helloasso_client_id']);
-        }
-        if (isset($post['helloasso_client_secret']) && $this->login->isAdmin()) {
-            $helloasso->setClientSecret($post['helloasso_client_secret']);
+        if ($this->login->isAdmin()) {
+            if (array_key_exists('helloasso_test_mode', $post)) {
+                $helloasso->setTestMode(true);
+            } else {
+                $helloasso->setTestMode(false);
+            }
+            if (isset($post['helloasso_organization_slug'])) {
+                $helloasso->setOrganizationSlug($post['helloasso_organization_slug']);
+            }
+            if (isset($post['helloasso_client_id'])) {
+                $helloasso->setClientId($post['helloasso_client_id']);
+            }
+            if (isset($post['helloasso_client_secret'])) {
+                $helloasso->setClientSecret($post['helloasso_client_secret']);
+            }
         }
         if (isset($post['inactives'])) {
             $helloasso->setInactives($post['inactives']);
@@ -374,16 +376,14 @@ class HelloassoController extends AbstractPluginController
         if (
             (isset($post['eventType']) && $post['eventType'] == 'Payment')
             && (isset($post['data']['state']) && $post['data']['state'] == 'Authorized')
+            && $post['metadata']['item_id']
         ) {
             $hh = new HelloassoHistory($this->zdb, $this->login, $this->preferences);
             $hh->add($post);
 
             // are we working on a real contribution?
             $real_contrib = false;
-            if (
-                array_key_exists('member_id', $post['metadata'])
-                && $post['data']['amount'] == $post['data']['items'][0]['amount']
-            ) {
+            if (array_key_exists('member_id', $post['metadata'])) {
                 $real_contrib = true;
             }
 
@@ -393,77 +393,77 @@ class HelloassoController extends AbstractPluginController
                     Analog::WARNING
                 );
                 $hh->setState(HelloassoHistory::STATE_ALREADYDONE);
-            }
-
-            // we'll now try to add the relevant cotisation
-            if ($post['data']['cashOutState'] == 'Transfered') {
-                /**
-                * We will use the following parameters:
-                * - $post['data']['amount']: the amount
-                * - $post['metadata']['member_id']: member id
-                * - $post['metadata']['item_id']: contribution type id
-                *
-                * If no member id is provided, we only send to post contribution
-                * script, Galette does not handle anonymous contributions
-                */
-                $amount = $post['data']['amount'];
-                $member_id = array_key_exists('member_id', $post['metadata']) ? $post['metadata']['member_id'] : '';
-                $contrib_args = [
-                    'type'          => $post['metadata']['item_id'],
-                    'adh'           => $member_id,
-                    'payment_type'  => PaymentType::CREDITCARD
-                ];
-                $check_contrib_args = [
-                    ContributionsTypes::PK  => $post['metadata']['item_id'],
-                    Adherent::PK            => $member_id,
-                    'type_paiement_cotis'   => PaymentType::CREDITCARD,
-                    'montant_cotis'         => $amount / 100,
-                ];
-                if ($this->preferences->pref_membership_ext != '') { //@phpstan-ignore-line
-                    $contrib_args['ext'] = $this->preferences->pref_membership_ext;
-                }
-                $contrib = new Contribution($this->zdb, $this->login, $contrib_args);
-
-                // all goes well, we can proceed
-                if ($real_contrib) {
-                    // Check contribution to set $contrib->errors to [] and handle contribution overlap
-                    $valid = $contrib->check($check_contrib_args, [], []);
-                    if ($valid !== true) {
-                        Analog::log(
-                            'Cannot create invalid contribution from Helloasso payment:' .
-                            implode("\n   ", $valid),
-                            Analog::ERROR
-                        );
-                        $hh->setState(HelloassoHistory::STATE_ERROR);
-                        return $response->withStatus(500, 'Internal error');
-                    }
-
-                    $store = $contrib->store();
-                    if ($store === true) {
-                        // contribution has been stored :)
-                        Analog::log(
-                            'Helloasso payment has been successfully registered as a contribution',
-                            Analog::DEBUG
-                        );
-                        $hh->setState(HelloassoHistory::STATE_PROCESSED);
-                    } else {
-                        // something went wrong :'(
-                        Analog::log(
-                            'An error occured while storing a new contribution from Helloasso payment',
-                            Analog::ERROR
-                        );
-                        $hh->setState(HelloassoHistory::STATE_ERROR);
-                        return $response->withStatus(500, 'Internal error');
-                    }
-                    return $response->withStatus(200);
-                }
             } else {
-                Analog::log(
-                    'A helloasso payment notification has been received, but is not completed!',
-                    Analog::WARNING
-                );
-                $hh->setState(HelloassoHistory::STATE_INCOMPLETE);
-                return $response->withStatus(500, 'Internal error');
+                // we'll now try to add the relevant cotisation
+                if ($post['data']['cashOutState'] == 'Transfered') {
+                    /**
+                    * We will use the following parameters:
+                    * - $post['data']['amount']: the amount
+                    * - $post['metadata']['member_id']: member id
+                    * - $post['metadata']['item_id']: contribution type id
+                    *
+                    * If no member id is provided, we only send to post contribution
+                    * script, Galette does not handle anonymous contributions
+                    */
+                    $amount = $post['data']['amount'];
+                    $member_id = array_key_exists('member_id', $post['metadata']) ? $post['metadata']['member_id'] : '';
+                    $contrib_args = [
+                        'type'          => $post['metadata']['item_id'],
+                        'adh'           => $member_id,
+                        'payment_type'  => PaymentType::CREDITCARD
+                    ];
+                    $check_contrib_args = [
+                        ContributionsTypes::PK  => $post['metadata']['item_id'],
+                        Adherent::PK            => $member_id,
+                        'type_paiement_cotis'   => PaymentType::CREDITCARD,
+                        'montant_cotis'         => $amount / 100,
+                    ];
+                    if ($this->preferences->pref_membership_ext != '') { //@phpstan-ignore-line
+                        $contrib_args['ext'] = $this->preferences->pref_membership_ext;
+                    }
+                    $contrib = new Contribution($this->zdb, $this->login, $contrib_args);
+
+                    // all goes well, we can proceed
+                    if ($real_contrib) {
+                        // Check contribution to set $contrib->errors to [] and handle contribution overlap
+                        $valid = $contrib->check($check_contrib_args, [], []);
+                        if ($valid !== true) {
+                            Analog::log(
+                                'Cannot create invalid contribution from Helloasso payment:' .
+                                implode("\n   ", $valid),
+                                Analog::ERROR
+                            );
+                            $hh->setState(HelloassoHistory::STATE_ERROR);
+                            return $response->withStatus(500, 'Internal error');
+                        }
+
+                        $store = $contrib->store();
+                        if ($store === true) {
+                            // contribution has been stored :)
+                            Analog::log(
+                                'Helloasso payment has been successfully registered as a contribution',
+                                Analog::DEBUG
+                            );
+                            $hh->setState(HelloassoHistory::STATE_PROCESSED);
+                        } else {
+                            // something went wrong :'(
+                            Analog::log(
+                                'An error occured while storing a new contribution from Helloasso payment',
+                                Analog::ERROR
+                            );
+                            $hh->setState(HelloassoHistory::STATE_ERROR);
+                            return $response->withStatus(500, 'Internal error');
+                        }
+                        return $response->withStatus(200);
+                    }
+                } else {
+                    Analog::log(
+                        'A helloasso payment notification has been received, but is not completed!',
+                        Analog::WARNING
+                    );
+                    $hh->setState(HelloassoHistory::STATE_INCOMPLETE);
+                    return $response->withStatus(500, 'Internal error');
+                }
             }
             return $response->withStatus(200);
         } else {
