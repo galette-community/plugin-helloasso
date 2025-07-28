@@ -81,7 +81,7 @@ class HelloassoHistory extends History
                 'history_date'  => date('Y-m-d H:i:s'),
                 'checkout_id'   => $request['data']['id'],
                 'amount'        => $request['data']['amount'] / 100,
-                'comments'      => $request['data']['order']['id'],
+                'comments'      => $request['metadata']['item_name'],
                 'request'       => Galette::jsonEncode($request),
                 'state'         => self::STATE_NONE
             ];
