@@ -26,6 +26,7 @@ namespace GaletteHelloasso\Controllers;
 use Analog\Analog;
 use DI\Attribute\Inject;
 use Galette\Controllers\AbstractPluginController;
+use Galette\Core\History;
 use Galette\Entity\Adherent;
 use Galette\Entity\Contribution;
 use Galette\Entity\ContributionsTypes;
@@ -367,6 +368,18 @@ class HelloassoController extends AbstractPluginController
         $body = $request->getBody();
         $post = json_decode($body->getContents(), true);
         $helloasso = new Helloasso($this->zdb, $this->preferences);
+
+        // Verify notification authenticity
+        // https://dev.helloasso.com/docs/secure-webhook
+        $legit_ip_address = $helloasso->getTestMode() ? '4.233.135.234' : '51.138.206.200';
+        $notification_ip_address = History::findUserIPAddress();
+        if ($notification_ip_address != $legit_ip_address) {
+            Analog::log(
+                'Unauthorized Helloasso notification detected!',
+                Analog::ERROR
+            );
+            return $response->withStatus(403);
+        }
 
         Analog::log(
             "Helloasso webhook request: " . var_export($post, true),
