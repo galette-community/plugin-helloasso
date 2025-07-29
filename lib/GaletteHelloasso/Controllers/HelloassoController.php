@@ -135,13 +135,6 @@ class HelloassoController extends AbstractPluginController
             if ($this->login->isLogged() && !$this->login->isSuperAdmin()) {
                 $adherent->load($this->login->id);
                 $metadata['member_id'] = $this->login->id;
-                $metadata['checkout_name'] = $adherent->name;
-                $metadata['checkout_firstname'] = $adherent->surname;
-                $metadata['checkout_email'] = $adherent->getEmail();
-                $metadata['checkout_address'] = preg_replace('/\r\n|\r|\n/', ', ', $adherent->getAddress());
-                $metadata['checkout_city'] = $adherent->getTown();
-                $metadata['checkout_zipcode'] = $adherent->getZipcode();
-                $metadata['checkout_company'] = $adherent->company_name;
             }
 
             $metadata['item_id'] = $item_id;

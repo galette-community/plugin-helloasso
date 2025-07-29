@@ -89,10 +89,7 @@
             {% if log.request.metadata.member_id is defined %}
                 <a href="{{ url_for("member", {"id": log.request.metadata.member_id}) }}">
             {% endif %}
-            {{ log.request.metadata.checkout_name|default(_T("Anonymous", "helloasso")) }}
-            {% if log.request.metadata.checkout_firstname is defined %}
-                {{ log.request.metadata.checkout_firstname }}
-            {% endif %}
+                {{ log.request.data.payer.lastName|upper }} {{ log.request.data.payer.firstName }}
             {% if log.request.metadata.member_id is defined %}
                 </a>
             {% endif %}
