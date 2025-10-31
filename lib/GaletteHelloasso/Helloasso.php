@@ -128,8 +128,8 @@ class Helloasso
                     default:
                         //we've got a preference not intended
                         Analog::log(
-                            '[' . get_class($this) . '] unknown preference `' .
-                            $row->nom_pref . '` in the database.',
+                            '[' . get_class($this) . '] unknown preference `'
+                            . $row->nom_pref . '` in the database.',
                             Analog::WARNING
                         );
                 }
@@ -146,8 +146,8 @@ class Helloasso
             $this->loadContributionsTypes();
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load helloasso settings |' .
-                $e->getMessage(),
+                '[' . get_class($this) . '] Cannot load helloasso settings |'
+                . $e->getMessage(),
                 Analog::ERROR
             );
             //consider plugin is not loaded when missing the main settings
@@ -169,8 +169,8 @@ class Helloasso
             $this->amounts_loaded = true;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load amounts from core contributions types' .
-                '` | ' . $e->getMessage(),
+                '[' . get_class($this) . '] Cannot load amounts from core contributions types'
+                . '` | ' . $e->getMessage(),
                 Analog::ERROR
             );
             //amounts are not loaded at this point
@@ -262,16 +262,16 @@ class Helloasso
             $edit = $this->zdb->execute($update);
 
             Analog::log(
-                '[' . get_class($this) .
-                '] Helloasso settings were sucessfully stored',
+                '[' . get_class($this)
+                . '] Helloasso settings were sucessfully stored',
                 Analog::DEBUG
             );
 
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot store helloasso settings' .
-                '` | ' . $e->getMessage(),
+                '[' . get_class($this) . '] Cannot store helloasso settings'
+                . '` | ' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -377,8 +377,8 @@ class Helloasso
             return json_decode($contents, true);
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot create Helloasso checkout' .
-                '` | ' . $e->getMessage(),
+                '[' . get_class($this) . '] Cannot create Helloasso checkout'
+                . '` | ' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
