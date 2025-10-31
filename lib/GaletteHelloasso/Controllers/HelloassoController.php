@@ -77,8 +77,8 @@ class HelloassoController extends AbstractPluginController
         if (!$helloasso->isLoaded()) {
             $this->flash->addMessageNow(
                 'error',
-                _T("<strong>Payment could not work</strong>: An error occurred (that has been logged) while loading Helloasso settings from the database.<br/>Please report the issue to the staff.", "helloasso") .
-                '<br/>' . _T("Our apologies for the annoyance.", "helloasso")
+                _T("<strong>Payment could not work</strong>: An error occurred (that has been logged) while loading Helloasso settings from the database.<br/>Please report the issue to the staff.", "helloasso")
+                . '<br/>' . _T("Our apologies for the annoyance.", "helloasso")
             );
         }
 
@@ -435,8 +435,8 @@ class HelloassoController extends AbstractPluginController
                         $valid = $contrib->setNoCheckLogin()->check($check_contrib_args, [], []);
                         if ($valid !== true) {
                             Analog::log(
-                                'Cannot create invalid contribution from Helloasso payment:' .
-                                implode("\n   ", $valid),
+                                'Cannot create invalid contribution from Helloasso payment:'
+                                . implode("\n   ", $valid),
                                 Analog::ERROR
                             );
                             $hh->setState(HelloassoHistory::STATE_ERROR);

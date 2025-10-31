@@ -162,8 +162,8 @@ class HelloassoHistory extends History
                     $new[] = $o;
                 } catch (\Exception $e) {
                     Analog::log(
-                        'Error loading helloasso history entry #' . $o[$this->getPk()] .
-                        ' ' . $e->getMessage(),
+                        'Error loading helloasso history entry #' . $o[$this->getPk()]
+                        . ' ' . $e->getMessage(),
                         Analog::WARNING
                     );
                 }
