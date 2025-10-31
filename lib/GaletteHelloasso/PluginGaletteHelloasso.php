@@ -106,7 +106,7 @@ class PluginGaletteHelloasso extends GalettePlugin
         global $preferences;
         $contents = [];
 
-        if ($preferences->showPublicPages($login)) {
+        if ($preferences->showPublicPage($login, 'pref_publicpages_visibility_generic')) {
             $contents[] = [
                 'label' => _T("Payment form", "helloasso"),
                 'route' => [
