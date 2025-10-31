@@ -5,7 +5,7 @@ Ce plugin offre :
 * la création automatique de contributions une fois les paiements validés.
 
 > [!NOTE]
-> Ce plugin nécessite la **version 1.2.0 de Galette minimum**.
+> Ce plugin nécessite la **version 1.2.1 de Galette minimum**.
 
 ![Écran du formulaire de paiement](images/form.jpg)
 
