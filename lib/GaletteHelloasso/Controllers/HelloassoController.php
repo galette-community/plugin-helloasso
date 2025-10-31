@@ -432,7 +432,7 @@ class HelloassoController extends AbstractPluginController
                     // all goes well, we can proceed
                     if ($real_contrib) {
                         // Check contribution to set $contrib->errors to [] and handle contribution overlap
-                        $valid = $contrib->check($check_contrib_args, [], []);
+                        $valid = $contrib->setNoCheckLogin()->check($check_contrib_args, [], []);
                         if ($valid !== true) {
                             Analog::log(
                                 'Cannot create invalid contribution from Helloasso payment:' .
@@ -443,8 +443,7 @@ class HelloassoController extends AbstractPluginController
                             return $response->withStatus(500, 'Internal error');
                         }
 
-                        $store = $contrib->store();
-                        if ($store === true) {
+                        if ($contrib->store()) {
                             // contribution has been stored :)
                             Analog::log(
                                 'Helloasso payment has been successfully registered as a contribution',
