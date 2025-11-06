@@ -6,10 +6,9 @@ from datetime import datetime
 from termcolor import colored
 from urllib.parse import urlparse
 
-# on Tuxfamily
-ssh_path = 'galette/galette-repository/plugins/'
-ssh_host = 'ssh.tuxfamily.org'
-galette_dl_repo = 'http://download.tuxfamily.org/galette/plugins/'
+ssh_path = '/var/www/galette.eu/download/plugins/'
+ssh_host = 'galette.eu'
+galette_dl_repo = 'https://galette.eu/download/plugins/'
 is_local = False
 
 local_dl_repo = os.path.join(
@@ -373,9 +372,9 @@ def add_libs(rel_name, galette_archive):
     shutil.rmtree(os.path.join(npm_dir, 'bin'))
     shutil.rmtree(os.path.join(npm_dir, 'tests'))
     os.remove(os.path.join(npm_dir, '.composer-require-checker.config.json'))
-    os.remove(os.path.join(npm_dir, 'composer.json.checker'))
     os.remove(os.path.join(npm_dir, '.docheader'))
     os.remove(os.path.join(npm_dir, '.gitignore'))
+    os.remove(os.path.join(npm_dir, '.phpcs.xml'))
     os.remove(os.path.join(npm_dir, '.php-cs-fixer.dist.php'))
     os.remove(os.path.join(npm_dir, 'phpstan.neon'))
     os.remove(os.path.join(npm_dir, 'lang/Makefile'))
@@ -397,20 +396,9 @@ def add_libs(rel_name, galette_archive):
     )
 
     if has_composer:
-        # install php dependencies
-        composer_cmd = 'composer install --ignore-platform-reqs --no-dev'
-        print(composer_dir)
+        composer_cmd = 'composer install --no-dev'
         p1 = subprocess.Popen(composer_cmd, shell=True, cwd=composer_dir)
         p1.wait()
-
-        # cleaunp files not required in releases
-        todrop = [
-            'composer.lock',
-            'composer.json'
-        ]
-        for td in todrop:
-            if os.path.exists(os.path.join(src_dir, rel_name, td)):
-                os.remove(os.path.join(src_dir, rel_name, td))
 
         #cleanup vendors
         for root, dirnames, filenames in os.walk(os.path.join(composer_dir, 'vendor')):
@@ -443,9 +431,6 @@ def add_libs(rel_name, galette_archive):
                 #begin to remove tcpdf not used fonts
                 if root.endswith('tcpdf/fonts'):
                     if dirname != 'dejavu-fonts-ttf-2.34':
-                        shutil.rmtree(os.path.join(root, dirname))
-                if root.endswith('vendor'):
-                    if dirname == 'bin':
                         shutil.rmtree(os.path.join(root, dirname))
 
             for filename in filenames:
