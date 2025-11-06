@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-24 16:05+0200\n"
+"POT-Creation-Date: 2025-11-06 00:21+0100\n"
 "PO-Revision-Date: 2025-07-03 15:53+0200\n"
 "Last-Translator: Guillaume AGNIERAY <dev@agnieray.net>\n"
 "Language-Team: \n"
@@ -24,7 +24,7 @@ msgid "Helloasso"
 msgstr ""
 
 #: ../lib/GaletteHelloasso/PluginGaletteHelloasso.php:60
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:215
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:209
 msgid "Helloasso History"
 msgstr ""
 
@@ -33,59 +33,59 @@ msgstr ""
 msgid "Payment form"
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:71
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:72
 msgid "HelloAsso payment"
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:79
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:80
 msgid ""
 "<strong>Payment could not work</strong>: An error occurred (that has been "
 "logged) while loading Helloasso settings from the database.<br/>Please "
 "report the issue to the staff."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:80
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:81
 msgid "Our apologies for the annoyance."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:87
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:88
 msgid ""
 "Helloasso details have not been defined. Please ask an administrator to add "
 "them in the plugin's settings."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:125
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:126
 #: ../tempcache/helloasso_form.html.twig:283
 msgid ""
 "The amount you've entered is lower than the minimum amount for the selected "
 "option. Please choose another option or change the amount."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:154
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:148
 msgid "An error occured redirecting to the checkout form."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:281
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:275
 msgid "Helloasso Settings"
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:334
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:330
 msgid "Helloasso settings have been saved."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:340
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:336
 msgid "An error occured saving helloasso settings."
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:487
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:495
 msgid "Helloasso payment success"
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:511
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:519
 msgid "Your payment has been aborted!"
 msgstr ""
 
-#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:531
+#: ../lib/GaletteHelloasso/Controllers/HelloassoController.php:539
 msgid "Helloasso payment failure"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid ""
 msgstr ""
 
 #: ../tempcache/helloasso_history.html.twig:89
-#: ../tempcache/helloasso_history.html.twig:253
+#: ../tempcache/helloasso_history.html.twig:246
 msgid "Request"
 msgstr ""
 
@@ -105,20 +105,16 @@ msgstr ""
 msgid "Duplicate"
 msgstr ""
 
-#: ../tempcache/helloasso_history.html.twig:181
-msgid "Anonymous"
-msgstr ""
-
-#: ../tempcache/helloasso_history.html.twig:204
+#: ../tempcache/helloasso_history.html.twig:197
 msgid "No request or unable to read request."
 msgstr ""
 
-#: ../tempcache/helloasso_history.html.twig:224
+#: ../tempcache/helloasso_history.html.twig:217
 #: ../tempcache/helloasso_error.html.twig:71
 msgid "Payment nb."
 msgstr ""
 
-#: ../tempcache/helloasso_history.html.twig:259
+#: ../tempcache/helloasso_history.html.twig:252
 msgid "Show/hide full request"
 msgstr ""
 
@@ -151,7 +147,7 @@ msgid "Connexion status"
 msgstr ""
 
 #: ../tempcache/helloasso_preferences.html.twig:119
-msgid "Helloasso webhook URL"
+msgid "Callback URL to configure in HelloAsso"
 msgstr ""
 
 #: ../tempcache/helloasso_preferences.html.twig:130
@@ -193,27 +189,27 @@ msgstr ""
 msgid "Test mode enabled"
 msgstr ""
 
-#: ../tempcache/helloasso_preferences.html.twig:290
+#: ../tempcache/helloasso_preferences.html.twig:291
 msgid "Name"
 msgstr ""
 
-#: ../tempcache/helloasso_preferences.html.twig:301
+#: ../tempcache/helloasso_preferences.html.twig:307
 msgid "Description"
 msgstr ""
 
-#: ../tempcache/helloasso_preferences.html.twig:311
+#: ../tempcache/helloasso_preferences.html.twig:322
 msgid "Type"
 msgstr ""
 
-#: ../tempcache/helloasso_preferences.html.twig:319
+#: ../tempcache/helloasso_preferences.html.twig:334
 msgid "Category"
 msgstr ""
 
-#: ../tempcache/helloasso_preferences.html.twig:330
+#: ../tempcache/helloasso_preferences.html.twig:350
 msgid "RNA Number"
 msgstr ""
 
-#: ../tempcache/helloasso_preferences.html.twig:348
+#: ../tempcache/helloasso_preferences.html.twig:369
 msgid ""
 "HelloAsso helps organizations collect payments online and offers its "
 "services free of charge. It covers all transaction fees so you can receive "
