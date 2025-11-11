@@ -416,12 +416,12 @@ class HelloassoController extends AbstractPluginController
                     $contrib_args = [
                         'type'          => $post['metadata']['item_id'],
                         'adh'           => $member_id,
-                        'payment_type'  => PaymentType::CREDITCARD
+                        'payment_type'  => PaymentType::HELLOASSO
                     ];
                     $check_contrib_args = [
                         ContributionsTypes::PK  => $post['metadata']['item_id'],
                         Adherent::PK            => $member_id,
-                        'type_paiement_cotis'   => PaymentType::CREDITCARD,
+                        'type_paiement_cotis'   => PaymentType::HELLOASSO,
                         'montant_cotis'         => $amount / 100,
                     ];
                     if ($this->preferences->pref_membership_ext != '') { //@phpstan-ignore-line
