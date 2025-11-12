@@ -111,6 +111,7 @@ class HelloassoController extends AbstractPluginController
         $helloasso_request = $request->getParsedBody();
         $helloasso = new Helloasso($this->zdb, $this->preferences);
         $adherent = new Adherent($this->zdb);
+        $contribution_type = new ContributionsTypes($this->zdb, (int) $helloasso_request['item_id']);
 
         $current_url = $this->preferences->getURL();
 
@@ -140,7 +141,9 @@ class HelloassoController extends AbstractPluginController
             $metadata['item_id'] = $item_id;
             $metadata['item_name'] = $helloasso_amounts[$item_id]['name'];
 
-            $checkout = $helloasso->checkout($metadata, $amount * 100);
+            $contains_donation = $contribution_type->isExtension() ? false : true;
+
+            $checkout = $helloasso->checkout($metadata, $amount * 100, $contains_donation);
 
             if (!$checkout) {
                 $this->flash->addMessage(

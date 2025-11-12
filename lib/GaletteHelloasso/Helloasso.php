@@ -334,12 +334,13 @@ class Helloasso
     /**
      * Helloasso Checkout
      *
-     * @param array<string, mixed> $metadata Array of metadata to transmit with payment
-     * @param float                $amount   Amount of payment
+     * @param array<string, mixed> $metadata          Array of metadata to transmit with payment
+     * @param float                $amount            Amount of payment
+     * @param ?bool                $contains_donation Does the checkout contain a donation?
      *
      * @return array|bool
      */
-    public function checkout(array $metadata, float $amount): array|bool
+    public function checkout(array $metadata, float $amount, ?bool $contains_donation = false): array|bool
     {
         try {
             $tokens = $this->getTokens();
@@ -350,7 +351,7 @@ class Helloasso
                 'backUrl' => $this->preferences->getURL() . '/plugins/helloasso/cancel',
                 'errorUrl' => $this->preferences->getURL() . '/plugins/helloasso/error',
                 'returnUrl' => $this->preferences->getURL() . '/plugins/helloasso/success',
-                'containsDonation' => false,
+                'containsDonation' => $contains_donation,
                 'payer' => [
                     'firstName' => array_key_exists('checkout_firstname', $metadata) ? $metadata['checkout_firstname'] : null,
                     'lastName' => array_key_exists('checkout_name', $metadata) ? $metadata['checkout_name'] : null,
