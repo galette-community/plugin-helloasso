@@ -361,7 +361,10 @@ class Helloasso
                     'zipCode' => array_key_exists('checkout_zipcode', $metadata) ? $metadata['checkout_zipcode'] : null,
                     'companyName' => array_key_exists('checkout_company', $metadata) ? $metadata['checkout_company'] : null
                 ],
-                'metadata' => $metadata
+                'metadata' => $metadata,
+                'paymentOptions' => [
+                    'enableSepa' => false
+                ]
             ];
 
             $client = $this->setupClient();
