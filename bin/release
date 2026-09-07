@@ -428,6 +428,16 @@ def add_libs(rel_name, galette_archive):
         composer_cmd = 'composer install --no-dev'
         run(composer_cmd, cwd=composer_dir)
 
+        # cleaunp files not required in releases
+        todrop = [
+            'composer.lock',
+            'composer.json',
+            'composer.json.checker'
+        ]
+        for td in todrop:
+            if os.path.exists(os.path.join(src_dir, rel_name, td)):
+                os.remove(os.path.join(src_dir, rel_name, td))
+
         #cleanup vendors
         for root, dirnames, filenames in os.walk(os.path.join(composer_dir, 'vendor')):
             #remove git directories
@@ -459,6 +469,9 @@ def add_libs(rel_name, galette_archive):
                 #begin to remove tcpdf not used fonts
                 if root.endswith('tcpdf/fonts'):
                     if dirname != 'dejavu-fonts-ttf-2.34':
+                        shutil.rmtree(os.path.join(root, dirname))
+                if root.endswith('vendor'):
+                    if dirname == 'bin':
                         shutil.rmtree(os.path.join(root, dirname))
 
             for filename in filenames:
